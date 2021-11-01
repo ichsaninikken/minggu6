@@ -40,7 +40,7 @@
                                     <td>{{ $s->email }}</td> 
                                     <td>
                                         <form action="/users/{{$s->id}}" method="post">
-                                            <a href="/users/{{$s->id}}" class="btn btn-info">Show</a>
+                                            <a href="/users/{{$s->id}}" class="btn btn-success">Show</a>
                                             <a href="/users/{{$s->id}}/edit" class="btn btn-warning">Edit</a>
                                             @csrf
                                             @method('DELETE')

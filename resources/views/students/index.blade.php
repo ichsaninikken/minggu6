@@ -2,7 +2,7 @@
 @section('content') 
     <div class="container">
         <div class="row justify-content-center"> 
-            <div class="col-md-8"> 
+            <div class="col-md-8.5"> 
                 <div class="card"> 
                     <div class="card-header">{{ __('STUDENT DATA') }}</div> 
 
@@ -40,11 +40,12 @@
                                     <td>{{ $s->department }}</td> 
                                     <td>
                                         <form action="/students/{{$s->id}}" method="post">
-                                            <a href="/students/{{$s->id}}" class="btn btn-info">Show</a>
+                                            <a href="/students/{{$s->id}}" class="btn btn-success">Show</a>
                                             <a href="/students/{{$s->id}}/edit" class="btn btn-warning">Edit</a>
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" name="delete" class="btn btn-danger">Delete</button>
+                                            <a href="/students/{{$s->id}}/detail" class="btn btn-info">Nilai</a>
                                         </form>
                                     </td> 
                                 </tr> 
