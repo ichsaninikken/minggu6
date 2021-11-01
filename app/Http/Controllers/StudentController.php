@@ -40,23 +40,24 @@ class StudentController extends Controller
     {
         $student = new Student;
 
+        if($request->file('photo')){ 
+            $image_name = $request->file('photo')->store('images','public'); 
+        }
+
         $student->nim = $request->nim;
         $student->name = $request->name;
         $student->department = $request->department;
         $student->phone_number = $request->phone_number;
+        $student->photo = $image_name;
 
         $kelas = new Kelas;
         $kelas->id = $request->Kelas;
-
         $student->kelas()->associate($kelas);
         $student->save();
-
-        //add data
-        //Student::create($request->all());
-
+        
         // if true, redirect to index
         return redirect()->route('students.index')
-            ->with('success', 'Add data success!');
+        ->with('success', 'Add data success!');
     }
 
     /**
@@ -93,16 +94,24 @@ class StudentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $student = Student::find($id);
-        $student->nim = $request->nim;
-        $student->name = $request->name;
-        $student->department = $request->department;
-        $student->phone_number = $request->phone_number;
-        $kelas = new Kelas;
-        $kelas->id = $request->Kelas;
-        $student->kelas()->associate($kelas);
-        $student->save();
-        return redirect()->route('students.index');
+        {
+            $student = Student::find($id);
+            $student->nim = $request->nim;
+            $student->name = $request->name;
+            $student->department = $request->department;
+            $student->phone_number = $request->phone_number;
+
+            if($student->photo && file_exists(storage_path('app/public/' . $student->photo))) { 
+                \Storage::delete('public/'.$student->photo); 
+            } 
+            $image_name = $request->file('photo')->store('images', 'public'); $student->photo = $image_name;
+
+            $kelas = new Kelas;
+            $kelas->id = $request->Kelas;
+            $student->kelas()->associate($kelas);
+            $student->save();
+            return redirect()->route('students.index');
+        }
     }
 
     /**
