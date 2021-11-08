@@ -27,7 +27,8 @@
                                     <th>ID</th> 
                                     <th>Name</th> 
                                     <th>Username</th> 
-                                    <th>Email</th> 
+                                    <th>Email</th>
+                                    <th>Role</th> 
                                     <th>Action</th> 
                                 </tr> 
                             </thead> 
@@ -38,6 +39,7 @@
                                     <td>{{ $s->name }}</td> 
                                     <td>{{ $s->username }}</td> 
                                     <td>{{ $s->email }}</td> 
+                                    <td>{{ $s->role }}</td>
                                     <td>
                                         <form action="/users/{{$s->id}}" method="post">
                                             <a href="/users/{{$s->id}}" class="btn btn-success">Show</a>
